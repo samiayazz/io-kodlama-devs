@@ -15,10 +15,10 @@ public class InMemoryLanguageRepository implements LanguageRepository {
         languages = new ArrayList<Language>();
 
         try {
-            languages.add(new Language("Java"));
-            languages.add(new Language("C#"));
-            languages.add(new Language("PHP"));
-            languages.add(new Language("JavaScript"));
+            this.add(new Language("Java"));
+            this.add(new Language("C#"));
+            this.add(new Language("PHP"));
+            this.add(new Language("JavaScript"));
         } catch (Exception e) {
         }
     }
@@ -41,6 +41,13 @@ public class InMemoryLanguageRepository implements LanguageRepository {
     @Override
     public void add(Language language) throws Exception {
         try {
+            int lastIndex = (int) this.languages.stream().count() - 1;
+            int lastId = 0;
+            if (lastIndex >= 0) {
+                lastId = this.languages.get(lastIndex).getId();
+            }
+            language.setId(lastId + 1);
+
             this.languages.add(language);
         } catch (Exception e) {
             throw e;
