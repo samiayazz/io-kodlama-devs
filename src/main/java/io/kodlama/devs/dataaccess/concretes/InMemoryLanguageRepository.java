@@ -29,13 +29,17 @@ public class InMemoryLanguageRepository implements LanguageRepository {
     }
 
     @Override
-    public Language getById(int id) {
-        return this.languages.stream().filter(language -> id == language.getId()).findFirst().orElse(null);
+    public Language getById(int id) throws Exception {
+        Language language = this.languages.stream().filter(lang -> id == lang.getId()).findFirst().orElse(null);
+        if (language == null) {
+            throw new Exception("Language not found");
+        }
+        return language;
     }
 
     @Override
     public boolean isNameExists(String name) {
-        return this.languages.stream().filter(language -> name == language.getName()).findFirst().orElse(null) == null ? false : true;
+        return this.languages.stream().filter(language -> language.getName().equals(name)).findFirst().orElse(null) == null ? false : true;
     }
 
     @Override
@@ -60,6 +64,7 @@ public class InMemoryLanguageRepository implements LanguageRepository {
         if (updatingLanguage == null) {
             throw new Exception("Language not found");
         }
+        newLanguage.setId(updatingLanguage.getId());
         this.languages.set(this.languages.indexOf(updatingLanguage), newLanguage);
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 public interface LanguageRepository {
     List<Language> getAll();
 
-    Language getById(int id);
+    Language getById(int id) throws Exception;
 
     boolean isNameExists(String name);
 

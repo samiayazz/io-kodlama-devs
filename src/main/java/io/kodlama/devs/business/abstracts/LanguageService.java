@@ -7,7 +7,7 @@ import java.util.List;
 public interface LanguageService {
     List<Language> getAll();
 
-    Language getById(int id);
+    Language getById(int id) throws Exception;
 
     void add(Language language) throws Exception;
 

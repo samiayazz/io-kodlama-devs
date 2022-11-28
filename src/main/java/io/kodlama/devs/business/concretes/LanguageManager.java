@@ -23,7 +23,7 @@ public class LanguageManager implements LanguageService {
     }
 
     @Override
-    public Language getById(int id) {
+    public Language getById(int id) throws Exception {
         return languageRepository.getById(id);
     }
 
